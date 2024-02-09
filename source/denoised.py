@@ -104,3 +104,15 @@ def display_images(noisy_images, denoised_images, n=5):
         plt.subplot(2, n, i + 1)
         plt.imshow(noisy_images[i])
         plt.title("Noisy")
+
+
+from PIL import Image
+def save_images(images, filenames, save_dir='data/denoised/'):
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+    for img, filename in zip(images, filenames):
+        img = Image.fromarray(np.uint8(img * 255))
+        img.save(os.path.join(save_dir, filename))
+
+# Save the denoised images
+save_images(denoised_images, filenames)
